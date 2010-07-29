@@ -20,14 +20,14 @@ class Depends
 	
 	public static function on($name)
 	{
-		if(isset($modules[$name])) return;
+		if(isset(self::$modules[$name])) return;
 		
 		foreach(self::$paths as $path)
 		{
-			if(is_dir($path.DS.$name))
+			if(is_dir($path.$name))
 			{
-				$modules[$name] = $path.DS.$name;
-				Kohana::modules($modules);
+				self::$modules[$name] = $path.DS.$name;
+				Kohana::modules(self::$modules);
 				break;
 			}
 		}
